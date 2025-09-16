@@ -1,17 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import Navigation from "./pages/Navigation";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>The Component Garden</Text>
-    </View>
+    <NavigationContainer>
+      <StatusBar style="dark" />
+
+      <Navigation />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

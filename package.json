@@ -1,0 +1,103 @@
+{
+  "name": "thecomponentgarden",
+  "version": "0.0.1",
+  "description": "The Component Garden is where we play with fancy React Native components.",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r --filter='./packages/*' run build",
+    "clean": "pnpm -r --filter='./packages/*' run clean",
+    "test": "pnpm -r run test",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check",
+    "lint:fix": "biome check --write",
+    "prepare": "pnpm run build",
+    "example": "cd example && pnpm start"
+  },
+  "keywords": [
+    "react-native",
+    "component",
+    "component-library",
+    "ui",
+    "ios",
+    "android"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antropia.studio/TheComponentGarden.git"
+  },
+  "author": "Antropia <oss@antropia.studio> (https://antropia.studio/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antropia.studio/TheComponentGarden/issues"
+  },
+  "homepage": "https://github.com/antropia.studio/TheComponentGarden#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "packageManager": "pnpm@10.16.1",
+  "devDependencies": {
+    "@biomejs/biome": "2.2.4",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@evilmartians/lefthook": "^1.12.3",
+    "@release-it/conventional-changelog": "^10.0.1",
+    "@types/react": "^19.1.12",
+    "commitlint": "^19.8.1",
+    "del-cli": "^6.0.0",
+    "react": "19.1.0",
+    "react-native": "0.81.4",
+    "react-native-builder-bob": "^0.40.13",
+    "release-it": "^19.0.4",
+    "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "angular"
+        }
+      }
+    }
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "create-react-native-library": {
+    "languages": "js",
+    "type": "library",
+    "version": "0.54.3"
+  }
+}

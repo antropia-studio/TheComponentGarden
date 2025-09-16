@@ -1,3 +1,4 @@
+/** biome-ignore-all assist/source/useSortedKeys: It makes sense to group colors by their use and not their name */
 const baseColors = {
   blinkingBlue: "#0030FF",
   sasquatchSocks: "#FF4B7E",
@@ -17,6 +18,8 @@ const themeColors = {
   "tertiary-content": baseColors.black,
   neutral: baseColors.alucardsNight,
   "neutral-content": baseColors.white,
+  base: baseColors.white,
+  "base-content": baseColors.black,
 };
 
 export const colors = { ...baseColors, ...themeColors };

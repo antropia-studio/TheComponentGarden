@@ -12,6 +12,6 @@ module.exports = (api) => {
     {
       presets: ["babel-preset-expo"],
     },
-    { root, pkg },
+    { pkg, root },
   );
 };

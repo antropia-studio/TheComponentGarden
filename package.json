@@ -1,41 +1,19 @@
 {
-  "name": "thecomponentgarden",
-  "version": "0.0.1",
-  "description": "The Component Garden is where we play with fancy React Native components.",
-  "private": true,
-  "scripts": {
-    "build": "pnpm -r --filter='./packages/*' run build",
-    "clean": "pnpm -r --filter='./packages/*' run clean",
-    "test": "pnpm -r run test",
-    "typecheck": "tsc --noEmit",
-    "lint": "biome check",
-    "lint:fix": "biome check --write",
-    "prepare": "pnpm run build",
-    "example:android": "pnpm --filter='./example' run android",
-    "example:ios": "pnpm --filter='./example' run ios"
-  },
-  "keywords": [
-    "react-native",
-    "component",
-    "component-library",
-    "ui",
-    "ios",
-    "android"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/antropia.studio/TheComponentGarden.git"
-  },
   "author": "Antropia <oss@antropia.studio> (https://antropia.studio/)",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/antropia.studio/TheComponentGarden/issues"
   },
-  "homepage": "https://github.com/antropia.studio/TheComponentGarden#readme",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
-  "packageManager": "pnpm@10.16.1",
+  "create-react-native-library": {
+    "languages": "js",
+    "type": "library",
+    "version": "0.54.3"
+  },
+  "description": "The Component Garden is where we play with fancy React Native components.",
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
     "@commitlint/config-conventional": "^19.8.1",
@@ -50,37 +28,30 @@
     "release-it": "^19.0.4",
     "typescript": "^5.9.2"
   },
+  "homepage": "https://github.com/antropia.studio/TheComponentGarden#readme",
+  "keywords": [
+    "react-native",
+    "component",
+    "component-library",
+    "ui",
+    "ios",
+    "android"
+  ],
+
+  "license": "MIT",
+  "name": "thecomponentgarden",
+  "packageManager": "pnpm@10.16.1",
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
-    },
-    "npm": {
-      "publish": true
-    },
-    "github": {
-      "release": true
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": {
-          "name": "angular"
-        }
-      }
-    }
+  "private": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "react-native-builder-bob": {
-    "source": "src",
     "output": "lib",
+    "source": "src",
     "targets": [
       [
         "module",
@@ -96,9 +67,39 @@
       ]
     ]
   },
-  "create-react-native-library": {
-    "languages": "js",
-    "type": "library",
-    "version": "0.54.3"
-  }
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "angular"
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antropia.studio/TheComponentGarden.git"
+  },
+  "scripts": {
+    "build": "pnpm -r --filter='./packages/*' run build",
+    "clean": "pnpm -r --filter='./packages/*' run clean",
+    "example:android": "pnpm --filter='./example' run android",
+    "example:ios": "pnpm --filter='./example' run ios",
+    "lint": "biome check",
+    "lint:fix": "biome check --write",
+    "prepare": "pnpm run build",
+    "test": "pnpm -r run test",
+    "typecheck": "tsc --noEmit"
+  },
+  "version": "0.0.1"
 }

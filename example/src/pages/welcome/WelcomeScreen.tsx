@@ -40,8 +40,8 @@ const WelcomeScreen = () => {
           </View>
 
           <Pressable
-            style={tw`bg-secondary px-6 py-4 rounded-xl`}
             onPress={() => navigation.openDrawer()}
+            style={tw`bg-secondary px-6 py-4 rounded-xl`}
           >
             <Text style={tw`text-secondary-content font-medium`}>
               Open library

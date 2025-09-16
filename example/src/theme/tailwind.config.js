@@ -1,3 +1,5 @@
 import { colors } from "./color";
 
-module.exports = { theme: { colors } };
+module.exports = {
+  theme: { colors },
+};

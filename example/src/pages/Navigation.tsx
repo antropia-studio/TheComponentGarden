@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerLabel } from "../components/Drawer/DrawerLabel";
 import tw from "../theme";
+import { CarouselScreen } from "./carousel/CarouselScreen";
 import WelcomeScreen from "./welcome/WelcomeScreen";
 
 const Drawer = createDrawerNavigator();
@@ -10,11 +11,11 @@ const Navigation = () => {
     <Drawer.Navigator
       initialRouteName="Welcome"
       screenOptions={{
-        headerShown: false,
         drawerContentStyle: tw`bg-primary`,
         drawerItemStyle: tw`bg-primary`,
-        drawerType: "back",
         drawerLabelStyle: tw`text-4xl text-white font-bold`,
+        drawerType: "back",
+        headerShown: false,
       }}
     >
       <Drawer.Screen
@@ -22,7 +23,17 @@ const Navigation = () => {
         name="Welcome"
         options={{
           drawerLabel: ({ focused }) => (
-            <DrawerLabel label="Welcome" focused={focused} />
+            <DrawerLabel focused={focused} label="Welcome" />
+          ),
+        }}
+      />
+
+      <Drawer.Screen
+        component={CarouselScreen}
+        name="Carousel"
+        options={{
+          drawerLabel: ({ focused }) => (
+            <DrawerLabel focused={focused} label="Carousel" />
           ),
         }}
       />

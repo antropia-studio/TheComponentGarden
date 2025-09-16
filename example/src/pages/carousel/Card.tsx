@@ -28,7 +28,7 @@ export const Card = ({
 
       <Image
         source={{ uri: coverImageUrl }}
-        style={tw`object-fit aspect-square rounded-md p-1`}
+        style={tw`aspect-square rounded-md p-1`}
       />
     </View>
   );

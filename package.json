@@ -11,7 +11,8 @@
     "lint": "biome check",
     "lint:fix": "biome check --write",
     "prepare": "pnpm run build",
-    "example": "cd example && pnpm start"
+    "example:android": "pnpm --filter='./example' run android",
+    "example:ios": "pnpm --filter='./example' run ios"
   },
   "keywords": [
     "react-native",

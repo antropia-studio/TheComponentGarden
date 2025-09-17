@@ -9,7 +9,7 @@ const Drawer = createDrawerNavigator();
 const Navigation = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="Welcome"
+      initialRouteName="Carousel"
       screenOptions={{
         drawerContentStyle: tw`bg-primary`,
         drawerItemStyle: tw`bg-primary`,

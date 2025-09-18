@@ -1,12 +1,6 @@
-import type { ComponentProps } from "react";
-import type { Card } from "./Card";
+import type { CardProps } from "@antropia/the-component-garden-card-carousel";
 
-export type CardData = { backgroundColor: string } & Pick<
-  ComponentProps<typeof Card>,
-  "title" | "activityTimeInMinutes" | "coverImageUrl"
->;
-
-export const CARDS: CardData[] = [
+export const CARDS: CardProps[] = [
   {
     activityTimeInMinutes: 5,
     backgroundColor: "#6DBD8F",

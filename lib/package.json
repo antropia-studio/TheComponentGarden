@@ -1,0 +1,51 @@
+{
+  "devDependencies": {
+    "del-cli": "6.0.0",
+    "react-native-builder-bob": "0.40.13",
+    "typescript": "5.9.2"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "name": "@antropia/the-component-garden-lib",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "react-native": "src/index.ts",
+  "react-native-builder-bob": {
+    "output": "lib",
+    "source": "src",
+    "targets": [
+      [
+        "commonjs",
+        {
+          "configFile": true,
+          "esm": true
+        }
+      ],
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "../tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "scripts": {
+    "build": "bob build",
+    "clean": "del-cli lib",
+    "prepare": "bob build"
+  },
+  "types": "./lib/typescript/commonjs/lib/src/index.d.ts",
+  "version": "0.0.1"
+}

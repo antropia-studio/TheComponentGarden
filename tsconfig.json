@@ -23,6 +23,12 @@
     "noUncheckedSideEffectImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "paths": {
+      "@antropia/the-component-garden-card-carousel": [
+        "./packages/card-carousel/src"
+      ],
+      "@antropia/the-component-garden-lib": ["./lib/src"]
+    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,

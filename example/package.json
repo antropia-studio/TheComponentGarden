@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@antropia/the-component-garden-card-carousel": "workspace:*",
     "@expo/metro-runtime": "~6.1.1",
     "@react-navigation/drawer": "^7.5.8",
     "@react-navigation/native": "^7.1.17",
@@ -26,6 +27,7 @@
   "scripts": {
     "android": "expo run:android",
     "ios": "expo run:ios",
+    "prebuild": "expo prebuild",
     "start": "expo start",
     "web": "expo start --web"
   },

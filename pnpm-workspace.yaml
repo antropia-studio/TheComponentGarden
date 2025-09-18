@@ -1,6 +1,7 @@
 packages:
   - packages/**
   - example
+  - lib
 
 onlyBuiltDependencies:
   - '@evilmartians/lefthook'

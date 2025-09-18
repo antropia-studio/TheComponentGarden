@@ -10,8 +10,15 @@ const root = path.resolve(__dirname, "..");
  *
  * @type {import('metro-config').MetroConfig}
  */
-const config = getDefaultConfig(__dirname);
+const defaultConfig = getDefaultConfig(__dirname);
 
-config.resolver.unstable_enablePackageExports = true;
+const config = {
+  ...defaultConfig,
+  resolver: {
+    ...defaultConfig.resolver,
+    unstable_enablePackageExports: true,
+  },
+  watchFolders: [root],
+};
 
 module.exports = config;

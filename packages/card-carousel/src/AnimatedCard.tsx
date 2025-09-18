@@ -1,3 +1,7 @@
+import {
+  calculateWeightedMidPoint,
+  fromPolarToCartesianCoordinates,
+} from "@antropia/the-component-garden-lib";
 import { useMemo } from "react";
 import Animated, {
   type SharedValue,
@@ -5,35 +9,21 @@ import Animated, {
   SlideInRight,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import {
-  calculateWeightedMidPoint,
-  fromPolarToCartesianCoordinates,
-} from "../../lib/math";
-import { Card } from "./Card";
-import type { CardData } from "./cards";
+import { Card, type Props as CardProps } from "./Card";
 
 const INNER_CIRCLE_RADIUS = 50;
 const OUTER_CIRCLE_RADIUS = 120;
 const Z_INDEX_THRESHOLD = 6;
 const MAX_ROTATION_IN_DEGREES = 15;
 
-type Props = CardData & {
+type Props = CardProps & {
   index: number;
   totalNumberOfCards: number;
   progress: SharedValue<number>;
   centrifugalForce: SharedValue<number>;
 };
 
-/**
- * For the animation of the animated card we will use the progress (a rational number), the initial index of the card,
- * and the total number of cards. With this information we will calculate first the initial position of the card, using
- * only the index and the total number of cards. Then we will use the progress to calculate the actual position of the
- * card. A progress value of 1 means the card is at position index + 1. That means that we can separate the progress
- * into the fractional part and the integer part to calculate the new position.
- */
-
 export const AnimatedCard = ({
-  backgroundColor,
   centrifugalForce,
   index,
   totalNumberOfCards,
@@ -97,10 +87,7 @@ export const AnimatedCard = ({
     >
       <Card
         style={[
-          {
-            backgroundColor,
-            transform: [{ translateX: "-50%" }, { translateY: "-50%" }],
-          },
+          { transform: [{ translateX: "-50%" }, { translateY: "-50%" }] },
         ]}
         {...props}
       />

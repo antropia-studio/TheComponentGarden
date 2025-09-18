@@ -37,10 +37,9 @@
     "ios",
     "android"
   ],
-
   "license": "MIT",
-  "name": "thecomponentgarden",
-  "packageManager": "pnpm@10.16.1",
+  "name": "the-component-garden",
+  "packageManager": "pnpm@10.17.0",
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
@@ -91,15 +90,15 @@
     "url": "git+https://github.com/antropia.studio/TheComponentGarden.git"
   },
   "scripts": {
-    "build": "pnpm -r --filter='./packages/*' run build",
-    "clean": "pnpm -r --filter='./packages/*' run clean",
+    "clean": "pnpm --filter='./lib' run clean && pnpm -r --filter='./packages/*' run clean",
     "example:android": "pnpm --filter='./example' run android",
     "example:ios": "pnpm --filter='./example' run ios",
+    "example:prebuild": "pnpm --filter='./example' run prebuild",
     "lint": "biome check",
     "lint:fix": "biome check --write",
-    "prepare": "pnpm run build",
-    "test": "pnpm -r run test",
-    "typecheck": "tsc --noEmit"
+    "lint:ts": "tsc --noEmit",
+    "prepare": "pnpm --filter='./lib' run prepare && pnpm -r --filter='./packages/*' run prepare",
+    "test": "pnpm -r run test"
   },
   "version": "0.0.1"
 }

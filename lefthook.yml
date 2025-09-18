@@ -5,8 +5,8 @@ pre-commit:
       glob: "*.{js,ts,jsx,tsx}"
       run: npm run lint {staged_files}
     types:
-      glob: "*.{js,ts, jsx, tsx}"
-      run: npm run typecheck
+      glob: "*.{ts,tsx}"
+      run: npm run lint:ts
 commit-msg:
   parallel: true
   commands:

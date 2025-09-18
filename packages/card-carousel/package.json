@@ -1,0 +1,120 @@
+{
+  "author": "Antropia <oss@antropia.studio> (https://antropia.studio/)",
+  "bugs": {
+    "url": "https://github.com/antropia.studio/TheComponentGarden/issues"
+  },
+  "dependencies": {
+    "@antropia/the-component-garden-lib": "workspace:*"
+  },
+  "description": "A carousel component that brings some joy to your React Native apps.",
+  "devDependencies": {
+    "del-cli": "^6.0.0",
+    "lucide-react-native": "^0.544.0",
+    "react": "19.1.0",
+    "react-native": "0.81.4",
+    "react-native-gesture-handler": "^2.28.0",
+    "react-native-reanimated": "^4.1.0",
+    "react-native-worklets": "^0.5.1",
+    "twrnc": "^4.9.1",
+    "typescript": "^5.9.2"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./lib/module/index.js",
+        "types": "./lib/typescript/module/packages/card-carousel/src/index.d.ts"
+      },
+      "require": {
+        "default": "./lib/commonjs/index.js",
+        "types": "./lib/typescript/commonjs/packages/card-carousel/src/index.d.ts"
+      }
+    }
+  },
+  "files": [
+    "src",
+    "lib",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__",
+    "!**/.*"
+  ],
+  "homepage": "https://github.com/antropia.studio/TheComponentGarden#readme",
+  "keywords": [
+    "react-native",
+    "component",
+    "component-library",
+    "ui",
+    "ios",
+    "android"
+  ],
+  "license": "MIT",
+  "main": "./lib/commonjs/index.js",
+  "module": "./lib/module/index.js",
+  "name": "@antropia/the-component-garden-card-carousel",
+  "packageManager": "pnpm@10.16.1",
+  "peerDependencies": {
+    "lucide-react-native": "^0.544.0",
+    "react": "*",
+    "react-native": "*",
+    "react-native-gesture-handler": "2.x.x",
+    "react-native-reanimated": "4.x.x"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "react-native-builder-bob": {
+    "output": "lib",
+    "source": "src",
+    "targets": [
+      [
+        "commonjs",
+        {
+          "configFile": true,
+          "esm": true
+        }
+      ],
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "../../tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "angular"
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antropia.studio/TheComponentGarden.git"
+  },
+  "scripts": {
+    "clean": "del-cli lib",
+    "prepare": "bob build",
+    "release": "release-it"
+  },
+  "types": "./lib/typescript/commonjs/packages/card-carousel/src/index.d.ts",
+  "version": "1.0.0"
+}

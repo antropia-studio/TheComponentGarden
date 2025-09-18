@@ -14,6 +14,11 @@
 /example/android
 /example/ios
 tsconfig.tsbuildinfo
+.aiassistant
+lib/lib
+lib/node_modules
+packages/**/lib
+packages/**/node_modules
 
 # OS
 **/.DS_Store

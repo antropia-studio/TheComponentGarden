@@ -55,10 +55,8 @@ export function calculateWeightedMidPoint({
 }): Coordinates {
   "worklet";
 
-  const clampedRatio = clamp({ max: 1, min: 0, value: ratio });
-
   return {
-    x: point1.x * (1 - clampedRatio) + point2.x * clampedRatio,
-    y: point1.y * (1 - clampedRatio) + point2.y * clampedRatio,
+    x: point1.x * (1 - ratio) + point2.x * ratio,
+    y: point1.y * (1 - ratio) + point2.y * ratio,
   };
 }

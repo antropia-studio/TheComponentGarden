@@ -11,23 +11,57 @@ import Animated, {
 } from "react-native-reanimated";
 import { Card, type Props as CardProps } from "./Card";
 
-const INNER_CIRCLE_RADIUS = 50;
-const OUTER_CIRCLE_RADIUS = 120;
 const Z_INDEX_THRESHOLD = 6;
-const MAX_ROTATION_IN_DEGREES = 15;
 
-type Props = CardProps & {
-  index: number;
-  totalNumberOfCards: number;
-  progress: SharedValue<number>;
-  centrifugalForce: SharedValue<number>;
+export type CardsConfiguration = {
+  /**
+   * Radius (in pixels) of the inner circle that positions cards when idle (i.e., not being dragged or animated).
+   *
+   * @default 50
+   */
+  innerCircleRadiusInPx?: number;
+
+  /**
+   * Radius (in pixels) of the outer circle used while cards are being dragged/animated.
+   *
+   * @default 120
+   */
+  outerCircleRadiusInPx?: number;
+
+  /**
+   * Vertical compression of the outer circle to create a pseudo‑3D (volumetric) look. 0 produces a flat horizontal
+   * line, 1 produces a perfect circle. Values between 0 and 1 flatten the circle vertically by that factor.
+   *
+   * @default 0.3
+   */
+  outerCircleVerticalCompressionFactor?: number;
+
+  /**
+   * Maximum per‑card tilt (in degrees) while dragging. 0 keeps cards perfectly upright; higher values increase the tilt
+   * as cards move farther from the center.
+   *
+   * @default 15
+   */
+  maxCardTiltInDegrees?: number;
 };
+
+type Props = CardProps &
+  CardsConfiguration & {
+    index: number;
+    totalNumberOfCards: number;
+    progress: SharedValue<number>;
+    centrifugalForce: SharedValue<number>;
+  };
 
 export const AnimatedCard = ({
   centrifugalForce,
   index,
   totalNumberOfCards,
   progress,
+  innerCircleRadiusInPx = 50,
+  outerCircleRadiusInPx = 120,
+  maxCardTiltInDegrees = 15,
+  outerCircleVerticalCompressionFactor = 0.3,
   ...props
 }: Props) => {
   const animatedStyles = useAnimatedStyle(() => {
@@ -38,16 +72,16 @@ export const AnimatedCard = ({
 
     const innerCircleCoords = fromPolarToCartesianCoordinates({
       angleInRadians,
-      radius: INNER_CIRCLE_RADIUS,
+      radius: innerCircleRadiusInPx,
     });
 
     const outerCircleCoords = fromPolarToCartesianCoordinates({
       angleInRadians,
-      radius: OUTER_CIRCLE_RADIUS,
+      radius: outerCircleRadiusInPx,
     });
 
     // We flatten the outer circle vertically
-    outerCircleCoords.y *= 0.3;
+    outerCircleCoords.y *= outerCircleVerticalCompressionFactor;
 
     const coords = calculateWeightedMidPoint({
       point1: innerCircleCoords,
@@ -62,7 +96,7 @@ export const AnimatedCard = ({
     }
 
     const rotationDeg =
-      (coords.x / OUTER_CIRCLE_RADIUS) * MAX_ROTATION_IN_DEGREES;
+      (coords.x / outerCircleRadiusInPx) * maxCardTiltInDegrees;
 
     return {
       elevation: Math.max(0, Math.round(zIndex * 0.01)),

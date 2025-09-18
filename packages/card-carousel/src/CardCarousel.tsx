@@ -6,16 +6,27 @@ import {
   GestureHandlerRootView,
 } from "react-native-gesture-handler";
 import { useSharedValue, withSpring } from "react-native-reanimated";
+import { scheduleOnRN } from "react-native-worklets";
 import tw from "twrnc";
-import { AnimatedCard } from "./AnimatedCard";
+import { AnimatedCard, type CardsConfiguration } from "./AnimatedCard";
 import type { Props as CardProps } from "./Card";
 
-const CENTRIFUGAL_FORCE_INCREASE = 1;
+type ListenersProps = {
+  onCardSelected?: (index: number) => void;
+};
 
 type ContentProps = { children: ReactNode } | { cards: CardProps[] };
 
-export type Props = ContentProps;
+export type Props = ContentProps & CardsConfiguration & ListenersProps;
 
+/**
+ * CardCarousel is a React functional component that provides a carousel-like interactive
+ * experience for navigating between cards. It uses gesture handling and animation to achieve
+ * smooth transitions and rotations between items.
+ *
+ * This component is designed to handle both dynamic card rendering based on a provided
+ * list of cards (`props.cards`) or custom child components (`props.children`).
+ */
 export const CardCarousel = (props: Props) => {
   const { width } = Dimensions.get("window");
   const minTranslationToRotate = 0.5 * width;
@@ -30,22 +41,24 @@ export const CardCarousel = (props: Props) => {
       progress.value = withSpring(
         initialProgress.current + event.translationX / minTranslationToRotate,
       );
-      centrifugalForce.value = withSpring(
-        centrifugalForce.value + CENTRIFUGAL_FORCE_INCREASE,
-      );
+
+      centrifugalForce.value = withSpring(1, { dampingRatio: 0.5, mass: 20 });
     })
     .onFinalize((event) => {
       const eventProgress = event.translationX / minTranslationToRotate;
 
-      if (eventProgress > 0.5) {
-        initialProgress.current = Math.floor(progress.value) + 1;
-        progress.value = withSpring(Math.floor(progress.value) + 1);
-      } else {
-        initialProgress.current = Math.floor(progress.value);
-        progress.value = withSpring(Math.floor(progress.value));
-      }
+      const finalizedProgress =
+        eventProgress > 0.5
+          ? Math.floor(progress.value) + 1
+          : Math.floor(progress.value);
 
+      initialProgress.current = finalizedProgress;
+      progress.value = withSpring(finalizedProgress);
       centrifugalForce.value = withSpring(0);
+
+      if (props.onCardSelected) {
+        scheduleOnRN(props.onCardSelected, finalizedProgress + 1);
+      }
     });
 
   return (
@@ -62,6 +75,7 @@ export const CardCarousel = (props: Props) => {
                     progress={progress}
                     totalNumberOfCards={props.cards.length}
                     {...card}
+                    {...props}
                   />
                 ))
               : props.children}

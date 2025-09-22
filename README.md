@@ -2,11 +2,7 @@
 
 ![Header - The Component Garden](./docs/header.png)
 
-</div>
-
-Welcome to The Component Garden! This is our playground to build new React Native components.
-
-<div align="center">
+**Welcome to The Component Garden! This is our playground to build new React Native components.**
 
 ![The Component Garden video](./docs/tcg-video.gif)
 
@@ -53,6 +49,8 @@ pnpm run example:android # For Android
 ```
 
 The project uses [biome](https://biomejs.dev/) for linting and formatting, so make sure you have it integrated with your IDE for great DX.
+
+---
 
 <div align="center">
 

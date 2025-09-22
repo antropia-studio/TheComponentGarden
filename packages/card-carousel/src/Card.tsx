@@ -3,18 +3,18 @@ import { Image, Text, View, type ViewProps } from "react-native";
 import tw from "twrnc";
 
 export interface Props extends ViewProps {
-  backgroundColor: string;
-  title: string;
   activityTimeInMinutes: number;
+  backgroundColor: string;
   coverImageUrl: string;
+  title: string;
 }
 
 export const Card = ({
-  backgroundColor,
-  title,
   activityTimeInMinutes,
+  backgroundColor,
   coverImageUrl,
   style,
+  title,
   ...props
 }: Props) => {
   return (

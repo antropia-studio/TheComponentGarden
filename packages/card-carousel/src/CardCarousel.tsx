@@ -1,4 +1,5 @@
-import { type ReactNode, useRef } from "react";
+import { positiveModulus } from "@antropia/the-component-garden-lib";
+import { Children, type ReactNode, useMemo, useRef } from "react";
 import { Dimensions, View } from "react-native";
 import {
   Gesture,
@@ -8,14 +9,16 @@ import {
 import { useSharedValue, withSpring } from "react-native-reanimated";
 import { scheduleOnRN } from "react-native-worklets";
 import tw from "twrnc";
-import { AnimatedCard, type CardsConfiguration } from "./AnimatedCard";
-import type { Props as CardProps } from "./Card";
+import { AnimatedItem, type CardsConfiguration } from "./AnimatedItem";
+import { Card, type Props as CardProps } from "./Card";
 
 type ListenersProps = {
   onCardSelected?: (index: number) => void;
 };
 
-type ContentProps = { children: ReactNode } | { cards: CardProps[] };
+type ContentProps =
+  | { children: ReactNode }
+  | { cards: CardProps[]; children?: never };
 
 export type Props = ContentProps & CardsConfiguration & ListenersProps;
 
@@ -34,6 +37,14 @@ export const CardCarousel = (props: Props) => {
   const initialProgress = useRef<number>(0);
   const progress = useSharedValue(0);
   const centrifugalForce = useSharedValue(0);
+
+  const numberOfItems = useMemo(() => {
+    if ("cards" in props) {
+      return props.cards.length;
+    } else {
+      return Children.count(props.children);
+    }
+  }, [props]);
 
   const pan = Gesture.Pan()
     .onBegin(() => {})
@@ -57,7 +68,10 @@ export const CardCarousel = (props: Props) => {
       centrifugalForce.value = withSpring(0);
 
       if (props.onCardSelected) {
-        scheduleOnRN(props.onCardSelected, finalizedProgress + 1);
+        scheduleOnRN(
+          props.onCardSelected,
+          positiveModulus(finalizedProgress + 1, numberOfItems),
+        );
       }
     });
 
@@ -68,17 +82,44 @@ export const CardCarousel = (props: Props) => {
           <View style={tw`relative size-0`}>
             {"cards" in props
               ? props.cards.map((card, index) => (
-                  <AnimatedCard
+                  <AnimatedItem
                     centrifugalForce={centrifugalForce}
                     index={index}
                     key={card.title}
                     progress={progress}
                     totalNumberOfCards={props.cards.length}
-                    {...card}
                     {...props}
-                  />
+                  >
+                    <Card
+                      style={[
+                        {
+                          transform: [
+                            { translateX: "-50%" },
+                            { translateY: "-50%" },
+                          ],
+                        },
+                      ]}
+                      {...card}
+                    />
+                  </AnimatedItem>
                 ))
-              : props.children}
+              : Children.map(props.children, (child, index) => {
+                  return (
+                    <AnimatedItem
+                      centrifugalForce={centrifugalForce}
+                      index={index}
+                      key={`item-${
+                        // biome-ignore lint/suspicious/noArrayIndexKey: We don't have any other data for each item, and the number of items here is very limited
+                        index
+                      }`}
+                      progress={progress}
+                      totalNumberOfCards={Children.count(props.children)}
+                      {...props}
+                    >
+                      {child}
+                    </AnimatedItem>
+                  );
+                })}
           </View>
         </View>
       </GestureDetector>

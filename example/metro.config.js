@@ -16,6 +16,12 @@ const config = {
   ...defaultConfig,
   resolver: {
     ...defaultConfig.resolver,
+    extraNodeModules: {
+      "@antropia/the-component-garden-card-carousel": path.resolve(
+        root,
+        "packages/card-carousel/src",
+      ),
+    },
     unstable_enablePackageExports: true,
   },
   watchFolders: [root],

@@ -2,14 +2,13 @@ import {
   calculateWeightedMidPoint,
   fromPolarToCartesianCoordinates,
 } from "@antropia/the-component-garden-lib";
-import { useMemo } from "react";
+import { type PropsWithChildren, useMemo } from "react";
 import Animated, {
   type SharedValue,
   SlideInLeft,
   SlideInRight,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import { Card, type Props as CardProps } from "./Card";
 
 const Z_INDEX_THRESHOLD = 6;
 
@@ -45,15 +44,16 @@ export type CardsConfiguration = {
   maxCardTiltInDegrees?: number;
 };
 
-type Props = CardProps &
-  CardsConfiguration & {
-    index: number;
-    totalNumberOfCards: number;
-    progress: SharedValue<number>;
-    centrifugalForce: SharedValue<number>;
-  };
+type AnimationProps = {
+  index: number;
+  totalNumberOfCards: number;
+  progress: SharedValue<number>;
+  centrifugalForce: SharedValue<number>;
+};
 
-export const AnimatedCard = ({
+type Props = CardsConfiguration & AnimationProps & PropsWithChildren;
+
+export const AnimatedItem = ({
   centrifugalForce,
   index,
   totalNumberOfCards,
@@ -62,7 +62,7 @@ export const AnimatedCard = ({
   outerCircleRadiusInPx = 120,
   maxCardTiltInDegrees = 15,
   outerCircleVerticalCompressionFactor = 0.3,
-  ...props
+  children,
 }: Props) => {
   const animatedStyles = useAnimatedStyle(() => {
     const angleIncrement = (2 * Math.PI) / totalNumberOfCards;
@@ -116,15 +116,9 @@ export const AnimatedCard = ({
   return (
     <Animated.View
       entering={enterAnimation.springify().mass(20).dampingRatio(0.5)}
-      key={props.title}
       style={animatedStyles}
     >
-      <Card
-        style={[
-          { transform: [{ translateX: "-50%" }, { translateY: "-50%" }] },
-        ]}
-        {...props}
-      />
+      {children}
     </Animated.View>
   );
 };

@@ -18,7 +18,7 @@ worth mentioning:
 - **Low maintenance**. This is not a production-ready set of components you can quickly add to your own apps, or maybe they are! However, keep in mind this will not be our main focus. We will accept PRs for bug fixes or adding some new props you really need for your project, but maintenance of the components will not be our priority.
 
 > [!IMPORTANT]
-> Use the code in this repository for curiosity, learning and reference, but not for production code.
+> Use the code in this repository for curiosity, learning and reference, but not for production.
 
 ## Project structure
 

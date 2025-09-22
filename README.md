@@ -1,8 +1,16 @@
-# The Component Garden
+<div align="center">
+
+![Header - The Component Garden](./docs/header.png)
+
+</div>
 
 Welcome to The Component Garden! This is our playground to build new React Native components.
 
+<div align="center">
+
 ![The Component Garden video](./docs/tcg-video.gif)
+
+</div>
 
 ## What is it?
 
@@ -11,7 +19,10 @@ worth mentioning:
 
 - **A project to learn**. This project is our personal lab, to explore new user interactions, implement new animations, and master React Native.
 - **Sharing knowledge**. A big part of our experiments is to share our findings with the community. This repository is the main piece of that.
-- **Slow maintenance**. This is not a production-ready set of components you can quickly add to your own apps, or maybe they are! However, keep in mind this will not be our main focus. We will accept PRs for bug fixes or adding some new props you really need for your project, but maintenance of the components will not be our priority.
+- **Low maintenance**. This is not a production-ready set of components you can quickly add to your own apps, or maybe they are! However, keep in mind this will not be our main focus. We will accept PRs for bug fixes or adding some new props you really need for your project, but maintenance of the components will not be our priority.
+
+> [!IMPORTANT]
+> Use the code in this repository for curiosity, learning and reference, but not for production code.
 
 ## Project structure
 

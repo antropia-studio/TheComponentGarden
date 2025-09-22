@@ -54,8 +54,10 @@ pnpm run example:android # For Android
 
 The project uses [biome](https://biomejs.dev/) for linting and formatting, so make sure you have it integrated with your IDE for great DX.
 
-## Made with ❤️ by Antropia
+<div align="center">
 
-[Antropia](https://antropia.studio/) is a studio focused on creating app prototypes.
+## With ❤️ by Antropia
 
-The Component Garden is part of our commitment to the open source community.
+[Webpage](https://antropia.studio/) | [Blog](https://antropia.studio/blog/) | [Bluesky](https://bsky.app/profile/antropia.bsky.social) | [Mastodon](https://mstdn.social/@Antropia) | [LinkedIn](https://www.linkedin.com/company/antropia-studio/)
+
+</div>

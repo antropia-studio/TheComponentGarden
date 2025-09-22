@@ -9,6 +9,7 @@ import Animated, {
   SlideInRight,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import tw from "twrnc";
 
 const Z_INDEX_THRESHOLD = 6;
 
@@ -101,9 +102,12 @@ export const AnimatedItem = ({
     return {
       elevation: Math.max(0, Math.round(zIndex * 0.01)),
       left: coords.x,
-      position: "absolute",
       top: coords.y,
-      transform: [{ rotate: `${rotationDeg}deg` }],
+      transform: [
+        { translateX: "-50%" },
+        { translateY: "-50%" },
+        { rotate: `${rotationDeg}deg` },
+      ],
       zIndex,
     };
   });
@@ -116,7 +120,7 @@ export const AnimatedItem = ({
   return (
     <Animated.View
       entering={enterAnimation.springify().mass(20).dampingRatio(0.5)}
-      style={animatedStyles}
+      style={[animatedStyles, tw`absolute`]}
     >
       {children}
     </Animated.View>

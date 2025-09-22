@@ -90,17 +90,7 @@ export const CardCarousel = (props: Props) => {
                     totalNumberOfCards={props.cards.length}
                     {...props}
                   >
-                    <Card
-                      style={[
-                        {
-                          transform: [
-                            { translateX: "-50%" },
-                            { translateY: "-50%" },
-                          ],
-                        },
-                      ]}
-                      {...card}
-                    />
+                    <Card {...card} />
                   </AnimatedItem>
                 ))
               : Children.map(props.children, (child, index) => {

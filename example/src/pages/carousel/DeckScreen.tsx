@@ -1,4 +1,4 @@
-import { CardCarousel } from "@antropia/the-component-garden-card-carousel";
+import { CardDeck } from "@antropia/the-component-garden-card-carousel";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Text, View } from "react-native";
@@ -14,8 +14,8 @@ type Mode = "card" | "emoji";
 
 const EMOJIS = ["🐶", "🐨", "🐷", "🐱"];
 
-export const CarouselScreen = () => {
-  const [selectedCardIndex, setSelectedCardIndex] = useState(1);
+export const DeckScreen = () => {
+  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
   const selectedCard = CARDS[selectedCardIndex];
   const selectedEmoji = EMOJIS[selectedCardIndex];
   const [mode, setMode] = useState<Mode>("card");
@@ -32,18 +32,15 @@ export const CarouselScreen = () => {
 
       <Header />
       {mode === "card" ? (
-        <CardCarousel cards={CARDS} onCardSelected={setSelectedCardIndex} />
+        <CardDeck cards={CARDS} onCardSelected={setSelectedCardIndex} />
       ) : (
-        <CardCarousel
-          innerCircleRadiusInPx={80}
-          onCardSelected={setSelectedCardIndex}
-        >
+        <CardDeck onCardSelected={setSelectedCardIndex} radiusInPx={120}>
           {EMOJIS.map((emoji) => (
-            <Text key={emoji} style={tw`text-8xl p-2`}>
+            <Text key={emoji} style={[tw`p-2`, { fontSize: 120 }]}>
               {emoji}
             </Text>
           ))}
-        </CardCarousel>
+        </CardDeck>
       )}
       {mode === "card" && selectedCard && <SelectedCard card={selectedCard} />}
       {mode === "emoji" && selectedEmoji && (

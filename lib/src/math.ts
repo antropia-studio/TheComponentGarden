@@ -7,17 +7,34 @@ export interface Coordinates {
  * Calculates the coordinates of a point on a circle's circumference based on the given radius and angle in radians.
  */
 export const fromPolarToCartesianCoordinates = ({
-  radius,
   angleInRadians,
+  offsetRadius = 0,
+  radius,
 }: {
-  radius: number;
   angleInRadians: number;
+  offsetRadius?: number;
+  radius: number;
 }): Coordinates => {
   "worklet";
 
   return {
-    x: radius * Math.cos(angleInRadians),
-    y: radius * Math.sin(angleInRadians),
+    x: radius * Math.cos(offsetRadius + angleInRadians),
+    y: radius * Math.sin(offsetRadius + angleInRadians),
+  };
+};
+
+export const multiply = ({
+  coordinates,
+  factor,
+}: {
+  coordinates: Coordinates;
+  factor: Coordinates;
+}) => {
+  "worklet";
+
+  return {
+    x: coordinates.x * factor.x,
+    y: coordinates.y * factor.y,
   };
 };
 
@@ -59,6 +76,51 @@ export const calculateWeightedMidPoint = ({
     x: point1.x * (1 - ratio) + point2.x * ratio,
     y: point1.y * (1 - ratio) + point2.y * ratio,
   };
+};
+
+/**
+ * Calculates the weighted position between multiple points based on a ratio.
+ * @param points An array of coordinates to interpolate between
+ * @param ratio A value between 0 and 1, where 0 returns the first point and 1 returns the last point
+ * @returns The interpolated position between all points
+ */
+export const calculateWeightedPosition = ({
+  points,
+  ratio,
+}: {
+  readonly points: Coordinates[];
+  ratio: number;
+}): Coordinates => {
+  "worklet";
+
+  if (points.length === 0) {
+    throw new Error("Points array cannot be empty");
+  }
+
+  if (points.length === 1 && points[0]) {
+    return points[0];
+  }
+
+  if (points.length === 2 && points[0] && points[1]) {
+    return calculateWeightedMidPoint({
+      point1: points[0],
+      point2: points[1],
+      ratio,
+    });
+  }
+
+  const segmentCount = points.length - 1;
+  const scaledRatio = ratio * segmentCount;
+  const segmentIndex = Math.min(Math.floor(scaledRatio), segmentCount - 1);
+  const segmentRatio = scaledRatio - segmentIndex;
+
+  // biome-ignore-start lint/style/noNonNullAssertion: Points are guaranteed to be defined here
+  return calculateWeightedMidPoint({
+    point1: points[segmentIndex]!,
+    point2: points[segmentIndex + 1]!,
+    ratio: segmentRatio,
+  });
+  // biome-ignore-end lint/style/noNonNullAssertion: Points are guaranteed to be defined here
 };
 
 /**

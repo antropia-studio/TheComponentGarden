@@ -13,7 +13,14 @@ const angleForIndex = ({
 }) => {
   "worklet";
 
-  return ((2 * Math.PI) / totalNumberOfCards) * index;
+  const baseAngle = ((2 * Math.PI) / totalNumberOfCards) * index;
+  const adjustmentAngle =
+    index === 0 ||
+    (index === totalNumberOfCards / 2 && totalNumberOfCards % 2 === 0)
+      ? 0
+      : -Math.PI * 0.05;
+
+  return baseAngle + adjustmentAngle;
 };
 
 export const getCoordinatesForIndex = ({

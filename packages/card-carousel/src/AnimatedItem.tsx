@@ -131,8 +131,8 @@ export const AnimatedItem = ({
     } else {
       return {
         ...baseStyle,
-        left: withSpring(idleCoords.x, { dampingRatio: 0.5, mass: 20 }),
-        top: withSpring(idleCoords.y, { dampingRatio: 0.5, mass: 20 }),
+        left: withSpring(idleCoords.x, { dampingRatio: 0.65, mass: 20 }),
+        top: withSpring(idleCoords.y, { dampingRatio: 0.65, mass: 20 }),
       };
     }
   });

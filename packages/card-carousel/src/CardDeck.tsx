@@ -25,6 +25,9 @@ type RenderItem = {
 
 export type Props = ContentProps & CardsConfiguration & ListenersProps;
 
+/**
+ * Component based on Daria Po's design: https://layers.to/layers/cmfkx8qk70002l709xazgx0cx-dopamins-app-onboarding
+ */
 export const CardDeck = (props: Props) => {
   const numberOfItems = useMemo(
     () =>

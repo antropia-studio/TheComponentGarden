@@ -50,6 +50,10 @@ pnpm run example:android # For Android
 
 The project uses [biome](https://biomejs.dev/) for linting and formatting, so make sure you have it integrated with your IDE for great DX.
 
+## Writeups
+
+- [The Component Garden: Card Deck](https://antropia.studio/blog/the-component-garden/)
+
 ---
 
 <div align="center">

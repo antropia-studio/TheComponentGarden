@@ -1,4 +1,5 @@
 import {
+  type Coordinates,
   fromPolarToCartesianCoordinates,
   multiply,
   positiveModulus,
@@ -14,11 +15,12 @@ const angleForIndex = ({
   "worklet";
 
   const baseAngle = ((2 * Math.PI) / totalNumberOfCards) * index;
-  const adjustmentAngle =
-    index === 0 ||
-    (index === totalNumberOfCards / 2 && totalNumberOfCards % 2 === 0)
-      ? 0
-      : -Math.PI * 0.05;
+
+  const isFirstCard = index === 0;
+  const isMidCard =
+    index === totalNumberOfCards / 2 && totalNumberOfCards % 2 === 0;
+
+  const adjustmentAngle = isFirstCard || isMidCard ? 0 : -Math.PI * 0.05;
 
   return baseAngle + adjustmentAngle;
 };
@@ -107,4 +109,24 @@ export const getItemCoordinates = ({
         : prevCoords;
 
   return { idleCoords, idleNextCoords, idlePrevCoords, nextCoords, prevCoords };
+};
+
+export const getZIndexForItem = ({ coords }: { coords: Coordinates }) => {
+  "worklet";
+
+  return Math.round(coords.y * 100);
+};
+
+export const getRotationForItem = ({
+  coords,
+  maxWidth,
+  maxCardTiltInDegrees,
+}: {
+  coords: Coordinates;
+  maxWidth: number;
+  maxCardTiltInDegrees: number;
+}) => {
+  "worklet";
+
+  return (coords.x / maxWidth) * maxCardTiltInDegrees;
 };

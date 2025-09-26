@@ -14,9 +14,11 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import tw from "twrnc";
-import { getItemCoordinates } from "./geometry";
-
-const Z_INDEX_THRESHOLD = 6;
+import {
+  getItemCoordinates,
+  getRotationForItem,
+  getZIndexForItem,
+} from "./geometry";
 
 export type CardsConfiguration = {
   /**
@@ -108,13 +110,13 @@ export const AnimatedItem = ({
       ratio: normalizedProgress,
     });
 
-    const baseZ = Math.round(coords.y * 100);
-    let zIndex = baseZ;
-    if (Math.abs(coords.y) < Z_INDEX_THRESHOLD) {
-      zIndex = baseZ + Math.round(-coords.x * 10);
-    }
+    const zIndex = getZIndexForItem({ coords });
 
-    const rotationDeg = (coords.x / radiusInPx) * maxCardTiltInDegrees;
+    const rotationDeg = getRotationForItem({
+      coords,
+      maxCardTiltInDegrees,
+      maxWidth: width * 0.2,
+    });
 
     const baseStyle = {
       elevation: Math.max(0, Math.round(zIndex * 0.01)),

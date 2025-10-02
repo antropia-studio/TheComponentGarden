@@ -14,7 +14,7 @@ const Navigation = () => {
       screenOptions={{
         drawerContentStyle: tw`bg-primary`,
         drawerItemStyle: tw`bg-primary`,
-        drawerLabelStyle: tw`text-4xl text-white font-bold`,
+        drawerLabelStyle: tw`font-bold text-4xl text-white`,
         drawerType: "back",
         headerShown: false,
       }}

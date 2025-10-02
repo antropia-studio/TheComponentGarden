@@ -95,7 +95,7 @@
     "example:ios": "pnpm --filter='./example' run ios",
     "example:prebuild": "pnpm --filter='./example' run prebuild",
     "lint": "biome check",
-    "lint:fix": "biome check --write",
+    "lint:fix": "biome check --write --unsafe",
     "lint:ts": "tsc --noEmit",
     "prepare": "pnpm --filter='./lib' run prepare && pnpm -r --filter='./packages/*' run prepare",
     "test": "pnpm -r run test"

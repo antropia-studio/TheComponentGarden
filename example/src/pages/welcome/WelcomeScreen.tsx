@@ -8,23 +8,23 @@ const WelcomeScreen = () => {
   const navigation = useNavigation<DrawerNavigationProp<ParamListBase>>();
 
   return (
-    <View style={tw`bg-neutral flex-1`}>
+    <View style={tw`flex-1 bg-neutral`}>
       <SafeAreaView style={tw`flex flex-1`}>
         <View
-          style={tw`flex flex-col flex-1 gap-10 items-center justify-between px-8 py-2`}
+          style={tw`flex flex-1 flex-col items-center justify-between gap-10 px-8 py-2`}
         >
           <View style={tw`flex flex-col gap-12`}>
             <View style={tw`flex flex-col`}>
-              <Text style={tw`text-6xl font-black text-secondary`}>
+              <Text style={tw`font-black text-6xl text-secondary`}>
                 The Component Garden
               </Text>
 
-              <Text style={tw`text-2xl font-light text-neutral-content`}>
+              <Text style={tw`font-light text-2xl text-neutral-content`}>
                 by <Text style={tw`font-black`}>Antropia</Text>
               </Text>
             </View>
 
-            <Text style={tw`text-xl text-neutral-content font-light`}>
+            <Text style={tw`font-light text-neutral-content text-xl`}>
               Welcome to{" "}
               <Text style={tw`font-bold text-secondary`}>
                 The Component Garden
@@ -41,9 +41,9 @@ const WelcomeScreen = () => {
 
           <Pressable
             onPress={() => navigation.openDrawer()}
-            style={tw`bg-secondary px-6 py-4 rounded-xl`}
+            style={tw`rounded-xl bg-secondary px-6 py-4`}
           >
-            <Text style={tw`text-secondary-content font-medium`}>
+            <Text style={tw`font-medium text-secondary-content`}>
               Open library
             </Text>
           </Pressable>

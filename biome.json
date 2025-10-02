@@ -28,6 +28,7 @@
     "rules": {
       "nursery": {
         "useSortedClasses": {
+          "level": "error",
           "options": {
             "attributes": ["style"],
             "functions": ["tw", "tw.style"]

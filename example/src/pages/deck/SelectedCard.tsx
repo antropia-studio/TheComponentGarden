@@ -14,13 +14,13 @@ export const SelectedCard = ({ card }: Props) => {
     <Animated.View
       entering={springify(FadeInDown)}
       exiting={springify(FadeOutDown)}
-      style={[tw`flex flex-col gap-2 items-center`]}
+      style={[tw`flex flex-col items-center gap-2`]}
     >
       <ArrowUp color={card.backgroundColor} />
 
       <Text
         style={[
-          tw`text-center text-xl italic mb-8 font-medium`,
+          tw`mb-8 text-center font-medium text-xl italic`,
           { color: card.backgroundColor },
         ]}
       >

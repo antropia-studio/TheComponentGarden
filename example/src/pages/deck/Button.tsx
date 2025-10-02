@@ -13,9 +13,9 @@ export const Button = ({ label, onPress }: Props) => {
     <Animated.View entering={springify(FadeInDown).delay(1000)}>
       <Pressable
         onPress={onPress}
-        style={tw`flex items-center bg-black px-6 py-4 rounded-full`}
+        style={tw`flex items-center rounded-full bg-black px-6 py-4`}
       >
-        <Text style={tw`text-white text-base font-medium`}>{label}</Text>
+        <Text style={tw`font-medium text-base text-white`}>{label}</Text>
       </Pressable>
     </Animated.View>
   );

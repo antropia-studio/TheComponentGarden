@@ -9,7 +9,7 @@ interface Props {
 export const DrawerLabel = ({ label, focused }: Props) => (
   <Text
     style={tw.style(
-      `text-3xl font-bold`,
+      `font-bold text-3xl`,
       focused ? "text-tertiary" : "text-primary-content",
     )}
   >

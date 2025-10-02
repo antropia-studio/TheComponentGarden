@@ -60,7 +60,7 @@ export const CardDeck = (props: Props) => {
   return (
     <GestureHandlerRootView style={tw`flex-1`}>
       <GestureDetector gesture={pan}>
-        <View style={tw`flex flex-col flex-1 items-center justify-center`}>
+        <View style={tw`flex flex-1 flex-col items-center justify-center`}>
           <View style={tw`relative size-0`}>
             {itemsToRender.map((item, index) => (
               <AnimatedItem

@@ -31,12 +31,12 @@ export const SelectedEmoji = ({ emoji }: Props) => {
     <Animated.View
       entering={springify(FadeInDown)}
       exiting={springify(FadeOutDown)}
-      style={[tw`flex flex-col gap-2 items-center`]}
+      style={[tw`flex flex-col items-center gap-2`]}
     >
       <ArrowUp color={color} />
 
       <Text
-        style={[tw`text-center text-xl italic mb-8 font-medium`, { color }]}
+        style={[tw`mb-8 text-center font-medium text-xl italic`, { color }]}
       >
         You picked a beautiful {name}
       </Text>

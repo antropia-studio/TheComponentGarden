@@ -24,7 +24,7 @@ export const DeckScreen = () => {
   return (
     <View
       style={[
-        tw`bg-base flex flex-col flex-1 justify-between px-4`,
+        tw`flex flex-1 flex-col justify-between bg-base px-4`,
         { paddingBottom: 20 + bottom, paddingTop: 40 + top },
       ]}
     >

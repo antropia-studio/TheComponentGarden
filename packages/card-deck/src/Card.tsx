@@ -19,7 +19,7 @@ export const Card = ({
 }: Props) => {
   return (
     <View
-      style={[tw`flex flex-col rounded-lg w-40`, { backgroundColor }, style]}
+      style={[tw`flex w-40 flex-col rounded-lg`, { backgroundColor }, style]}
       {...props}
     >
       <View style={tw`flex flex-col px-2 pt-2`}>

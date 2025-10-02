@@ -15,18 +15,18 @@
   },
   "description": "The Component Garden is where we play with fancy React Native components.",
   "devDependencies": {
-    "@biomejs/biome": "2.2.4",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@evilmartians/lefthook": "^1.12.3",
+    "@biomejs/biome": "2.2.5",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@evilmartians/lefthook": "^1.13.6",
     "@release-it/conventional-changelog": "^10.0.1",
-    "@types/react": "^19.1.12",
-    "commitlint": "^19.8.1",
-    "del-cli": "^6.0.0",
-    "react": "19.1.0",
+    "@types/react": "^19.2.0",
+    "commitlint": "^20.1.0",
+    "del-cli": "^7.0.0",
+    "react": "19.2.0",
     "react-native": "0.81.4",
     "react-native-builder-bob": "^0.40.13",
-    "release-it": "^19.0.4",
-    "typescript": "^5.9.2"
+    "release-it": "^19.0.5",
+    "typescript": "^5.9.3"
   },
   "homepage": "https://github.com/antropia.studio/TheComponentGarden#readme",
   "keywords": [

@@ -1,8 +1,8 @@
 {
   "devDependencies": {
-    "del-cli": "6.0.0",
+    "del-cli": "7.0.0",
     "react-native-builder-bob": "0.40.13",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3"
   },
   "files": [
     "lib",

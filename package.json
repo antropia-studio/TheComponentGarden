@@ -39,7 +39,7 @@
   ],
   "license": "MIT",
   "name": "the-component-garden",
-  "packageManager": "pnpm@10.17.0",
+  "packageManager": "pnpm@10.18.0",
   "peerDependencies": {
     "react": "*",
     "react-native": "*"

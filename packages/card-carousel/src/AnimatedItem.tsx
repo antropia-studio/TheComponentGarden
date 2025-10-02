@@ -123,7 +123,12 @@ export const AnimatedItem = ({
       transform: [
         { translateX: "-50%" },
         { translateY: "-50%" },
-        { rotate: `${rotationDeg}deg` },
+        {
+          rotate: withSpring(`${rotationDeg}deg`, {
+            dampingRatio: 0.65,
+            mass: 100,
+          }),
+        },
       ],
       zIndex,
     };
@@ -133,8 +138,8 @@ export const AnimatedItem = ({
     } else {
       return {
         ...baseStyle,
-        left: withSpring(idleCoords.x, { dampingRatio: 0.65, mass: 20 }),
-        top: withSpring(idleCoords.y, { dampingRatio: 0.65, mass: 20 }),
+        left: withSpring(idleCoords.x, { dampingRatio: 0.65, mass: 2000 }),
+        top: withSpring(idleCoords.y, { dampingRatio: 0.65, mass: 2000 }),
       };
     }
   });

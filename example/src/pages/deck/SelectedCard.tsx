@@ -1,4 +1,4 @@
-import type { CardProps } from "@antropia/the-component-garden-card-carousel";
+import type { CardProps } from "@antropia/the-component-garden-card-deck";
 import { ArrowUp } from "lucide-react-native";
 import { Text } from "react-native";
 import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";

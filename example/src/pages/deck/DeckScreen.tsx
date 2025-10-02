@@ -1,4 +1,4 @@
-import { CardDeck } from "@antropia/the-component-garden-card-carousel";
+import { CardDeck } from "@antropia/the-component-garden-card-deck";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Text, View } from "react-native";

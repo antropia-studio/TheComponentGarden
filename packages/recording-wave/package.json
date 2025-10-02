@@ -19,11 +19,11 @@
     ".": {
       "import": {
         "default": "./lib/module/index.js",
-        "types": "./lib/typescript/module/packages/card-carousel/src/index.d.ts"
+        "types": "./lib/typescript/module/packages/recording-wave/src/index.d.ts"
       },
       "require": {
         "default": "./lib/commonjs/index.js",
-        "types": "./lib/typescript/commonjs/packages/card-carousel/src/index.d.ts"
+        "types": "./lib/typescript/commonjs/packages/recording-wave/src/index.d.ts"
       }
     }
   },
@@ -112,6 +112,6 @@
     "prepare": "bob build",
     "release": "release-it"
   },
-  "types": "./lib/typescript/commonjs/packages/card-carousel/src/index.d.ts",
+  "types": "./lib/typescript/commonjs/packages/recording-wave/src/index.d.ts",
   "version": "1.0.0"
 }

@@ -6,7 +6,7 @@
   "dependencies": {
     "@antropia/the-component-garden-lib": "workspace:*"
   },
-  "description": "A carousel component that brings some joy to your React Native apps.",
+  "description": "A deck component that brings some joy to your React Native apps.",
   "devDependencies": {
     "del-cli": "^7.0.0",
     "lucide-react-native": "^0.544.0",
@@ -22,11 +22,11 @@
     ".": {
       "import": {
         "default": "./lib/module/index.js",
-        "types": "./lib/typescript/module/packages/card-carousel/src/index.d.ts"
+        "types": "./lib/typescript/module/packages/card-deck/src/index.d.ts"
       },
       "require": {
         "default": "./lib/commonjs/index.js",
-        "types": "./lib/typescript/commonjs/packages/card-carousel/src/index.d.ts"
+        "types": "./lib/typescript/commonjs/packages/card-deck/src/index.d.ts"
       }
     }
   },
@@ -50,7 +50,7 @@
   "license": "MIT",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
-  "name": "@antropia/the-component-garden-card-carousel",
+  "name": "@antropia/the-component-garden-card-deck",
   "packageManager": "pnpm@10.16.1",
   "peerDependencies": {
     "lucide-react-native": "^0.544.0",
@@ -115,6 +115,6 @@
     "prepare": "bob build",
     "release": "release-it"
   },
-  "types": "./lib/typescript/commonjs/packages/card-carousel/src/index.d.ts",
+  "types": "./lib/typescript/commonjs/packages/card-deck/src/index.d.ts",
   "version": "1.0.0"
 }

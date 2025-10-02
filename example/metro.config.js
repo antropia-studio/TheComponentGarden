@@ -17,9 +17,9 @@ const config = {
   resolver: {
     ...defaultConfig.resolver,
     extraNodeModules: {
-      "@antropia/the-component-garden-card-carousel": path.resolve(
+      "@antropia/the-component-garden-card-deck": path.resolve(
         root,
-        "packages/card-carousel/src",
+        "packages/card-deck/src",
       ),
     },
     unstable_enablePackageExports: true,

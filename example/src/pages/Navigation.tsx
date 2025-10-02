@@ -1,7 +1,8 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerLabel } from "../components/Drawer/DrawerLabel";
 import tw from "../theme";
-import { DeckScreen } from "./carousel/DeckScreen";
+import { DeckScreen } from "./deck/DeckScreen";
+import { RecordingWaveScreen } from "./recording-wave/RecordingWaveScreen";
 import WelcomeScreen from "./welcome/WelcomeScreen";
 
 const Drawer = createDrawerNavigator();
@@ -34,6 +35,16 @@ const Navigation = () => {
         options={{
           drawerLabel: ({ focused }) => (
             <DrawerLabel focused={focused} label="Deck" />
+          ),
+        }}
+      />
+
+      <Drawer.Screen
+        component={RecordingWaveScreen}
+        name="RecordingWave"
+        options={{
+          drawerLabel: ({ focused }) => (
+            <DrawerLabel focused={focused} label="Recording Wave" />
           ),
         }}
       />

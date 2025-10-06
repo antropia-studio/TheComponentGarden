@@ -5,3 +5,7 @@ packages:
 
 onlyBuiltDependencies:
   - '@evilmartians/lefthook'
+
+peerDependencyRules:
+  allowAny:
+  - "react-native-svg"

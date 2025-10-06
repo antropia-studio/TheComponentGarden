@@ -53,7 +53,7 @@
   "name": "@antropia/the-component-garden-card-deck",
   "packageManager": "pnpm@10.16.1",
   "peerDependencies": {
-    "lucide-react-native": "^0.544.0",
+    "lucide-react-native": "0.x.x",
     "react": "*",
     "react-native": "*",
     "react-native-gesture-handler": "2.x.x",

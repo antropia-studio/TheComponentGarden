@@ -12,6 +12,7 @@
     "lucide-react-native": "^0.544.0",
     "react": "19.1.0",
     "react-native": "0.81.4",
+    "react-native-svg": "15.13.0",
     "twrnc": "^4.10.1",
     "typescript": "^5.9.3"
   },
@@ -50,11 +51,12 @@
   "name": "@antropia/the-component-garden-recording-wave",
   "packageManager": "pnpm@10.16.1",
   "peerDependencies": {
-    "lucide-react-native": "^0.544.0",
+    "lucide-react-native": "0.x.x",
     "react": "*",
     "react-native": "*",
     "react-native-gesture-handler": "2.x.x",
-    "react-native-reanimated": "4.x.x"
+    "react-native-reanimated": "4.x.x",
+    "react-native-svg": "15.x.x"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

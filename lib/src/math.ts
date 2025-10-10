@@ -3,6 +3,8 @@ export interface Coordinates {
   y: number;
 }
 
+export type Vector = Coordinates;
+
 /**
  * Calculates the coordinates of a point on a circle's circumference based on the given radius and angle in radians.
  */
@@ -21,6 +23,34 @@ export const fromPolarToCartesianCoordinates = ({
     x: radius * Math.cos(offsetRadius + angleInRadians),
     y: radius * Math.sin(offsetRadius + angleInRadians),
   };
+};
+
+export const vectorFromCoordinates = ({
+  coords1,
+  coords2,
+}: {
+  coords1: Coordinates;
+  coords2: Coordinates;
+}): Vector => {
+  "worklet";
+
+  return {
+    x: coords2.x - coords1.x,
+    y: coords2.y - coords1.y,
+  };
+};
+
+export const vectorMagnitude = (vector: Vector): number => {
+  "worklet";
+
+  return Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+};
+
+export const normalizeVector = (vector: Vector): Vector => {
+  "worklet";
+
+  const magnitude = vectorMagnitude(vector);
+  return { x: vector.x / magnitude, y: vector.y / magnitude };
 };
 
 export const multiply = ({

@@ -8,11 +8,15 @@
   },
   "description": "A carousel component that brings some joy to your React Native apps.",
   "devDependencies": {
+    "@shopify/react-native-skia": "2.3.0",
     "del-cli": "^7.0.0",
     "lucide-react-native": "^0.544.0",
     "react": "19.1.0",
     "react-native": "0.81.4",
+    "react-native-gesture-handler": "^2.28.0",
+    "react-native-reanimated": "4.1.2",
     "react-native-svg": "15.13.0",
+    "simplex-noise": "^4.0.3",
     "twrnc": "^4.10.1",
     "typescript": "^5.9.3"
   },
@@ -51,12 +55,14 @@
   "name": "@antropia/the-component-garden-recording-wave",
   "packageManager": "pnpm@10.16.1",
   "peerDependencies": {
+    "@shopify/react-native-skia": "2.x.x",
     "lucide-react-native": "0.x.x",
     "react": "*",
     "react-native": "*",
     "react-native-gesture-handler": "2.x.x",
     "react-native-reanimated": "4.x.x",
-    "react-native-svg": "15.x.x"
+    "react-native-svg": "15.x.x",
+    "simplex-noise": "4.x.x"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

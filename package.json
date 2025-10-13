@@ -42,7 +42,7 @@
   ],
   "license": "MIT",
   "name": "the-component-garden",
-  "packageManager": "pnpm@10.18.1",
+  "packageManager": "pnpm@10.18.2",
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
@@ -97,6 +97,7 @@
     "example:android": "pnpm --filter='./example' run android",
     "example:ios": "pnpm --filter='./example' run ios",
     "example:prebuild": "pnpm --filter='./example' run prebuild",
+    "example:start": "pnpm --filter='./example' run start",
     "lint": "biome check",
     "lint:fix": "biome check --write --unsafe",
     "lint:ts": "tsc --noEmit",

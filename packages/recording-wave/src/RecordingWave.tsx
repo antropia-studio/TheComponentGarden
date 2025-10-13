@@ -19,18 +19,18 @@ import { useEffect, useMemo } from "react";
 import { View } from "react-native";
 import Animated, {
   Easing,
+  type SharedValue,
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
   withSequence,
-  withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { createNoise3D } from "simplex-noise";
 import tw from "twrnc";
 
 const TAU = Math.PI * 2;
-const NUMBER_OF_WAVES = 100;
+const NUMBER_OF_WAVES = 20;
 const SEGMENTS = 80;
 const SMOOTHNESS = 1;
 const WAVE_FACTOR = 5;
@@ -41,13 +41,17 @@ const noise = createNoise3D();
 const getPath = ({
   radius,
   loudness,
+  index,
   seed,
+  totalNumberOfWaves,
   center,
 }: {
   radius: number;
   loudness: number;
   center: Coordinates;
   seed: number;
+  index: number;
+  totalNumberOfWaves: number;
 }) => {
   const points: Coordinates[] = [];
   let hasFinished = false;
@@ -59,6 +63,7 @@ const getPath = ({
       radius: NOISE_SCALE,
     });
 
+    const indexFactor = 0.5 * (index / totalNumberOfWaves);
     const randomFactor =
       (0.1 + loudness) * (1 + noise(noiseCoords.x, noiseCoords.y, seed * 0.01));
     const sinFactor =
@@ -66,7 +71,7 @@ const getPath = ({
 
     const coords = fromPolarToCartesianCoordinates({
       angleInRadians,
-      radius: radius * 0.8 - (sinFactor + 30 * randomFactor),
+      radius: radius * 0.8 - indexFactor * (sinFactor + 60 * randomFactor),
     });
 
     points.push({ x: coords.x + center.x, y: coords.y + center.y });
@@ -140,10 +145,12 @@ export const CircularWave = ({
   index,
   radius,
   center,
+  volume,
   totalNumberOfWaves,
 }: {
   center: Coordinates;
   radius: number;
+  volume: SharedValue<number>;
   index: number;
   totalNumberOfWaves: number;
 }) => {
@@ -151,7 +158,6 @@ export const CircularWave = ({
     () => 0.5 * (index / totalNumberOfWaves),
     [index, totalNumberOfWaves],
   );
-  const loudness = useSharedValue(0);
 
   const color = useMemo(
     () =>
@@ -163,30 +169,59 @@ export const CircularWave = ({
     [index, totalNumberOfWaves],
   );
 
-  const startPath = getPath({ center, loudness: 0, radius, seed: index });
-  const path01 = getPath({ center, loudness: 0.3, radius, seed: index + 1000 });
-  const path02 = getPath({ center, loudness: 0.6, radius, seed: index + 1001 });
-  const path03 = getPath({ center, loudness: 0.8, radius, seed: index + 1002 });
-  const endPath = getPath({ center, loudness: 1, radius, seed: index });
+  const path01 = getPath({
+    center,
+    index,
+    loudness: 0,
+    radius,
+    seed: 10,
+    totalNumberOfWaves,
+  });
+  const path02 = getPath({
+    center,
+    index,
+    loudness: 0.2,
+    radius,
+    seed: 20,
+    totalNumberOfWaves,
+  });
+  const path03 = getPath({
+    center,
+    index,
+    loudness: 0.4,
+    radius,
+    seed: 30,
+    totalNumberOfWaves,
+  });
+  const path04 = getPath({
+    center,
+    index,
+    loudness: 0.6,
+    radius,
+    seed: 40,
+    totalNumberOfWaves,
+  });
+  const path05 = getPath({
+    center,
+    index,
+    loudness: 0.8,
+    radius,
+    seed: 50,
+    totalNumberOfWaves,
+  });
+  const path06 = getPath({
+    center,
+    index,
+    loudness: 1,
+    radius,
+    seed: 60,
+    totalNumberOfWaves,
+  });
   const path = usePathInterpolation(
-    loudness,
-    [0, 0.3, 0.6, 0.8, 1],
-    [startPath, path01, path02, path03, endPath],
+    volume,
+    [0, 0.2, 0.4, 0.6, 0.8, 1],
+    [path01, path02, path03, path04, path05, path06],
   );
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: no need to include shared values
-  useEffect(() => {
-    loudness.value = withRepeat(
-      withSequence(
-        withSpring(0.8 * Math.random() + 0.2 * (index / totalNumberOfWaves), {
-          dampingRatio: 0.5,
-          mass: 20,
-        }),
-        withSpring(0, { dampingRatio: 0.5, mass: 20 }),
-      ),
-      -1,
-    );
-  }, [index, totalNumberOfWaves]);
 
   return (
     <Path
@@ -199,7 +234,11 @@ export const CircularWave = ({
   );
 };
 
-export const RecordingWave = () => {
+interface Props {
+  volume: SharedValue<number>;
+}
+
+export const RecordingWave = ({ volume }: Props) => {
   const rotation = useSharedValue(0);
   const size = 300;
 
@@ -226,6 +265,7 @@ export const RecordingWave = () => {
               key={`wave_${i}`}
               radius={size * 0.4}
               totalNumberOfWaves={NUMBER_OF_WAVES}
+              volume={volume}
             />
           ))}
           <BackdropBlur

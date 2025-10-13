@@ -16,7 +16,7 @@ import {
   usePathInterpolation,
 } from "@shopify/react-native-skia";
 import { useEffect, useMemo } from "react";
-import { View } from "react-native";
+import { Dimensions, View } from "react-native";
 import Animated, {
   Easing,
   type SharedValue,
@@ -30,7 +30,7 @@ import { createNoise3D } from "simplex-noise";
 import tw from "twrnc";
 
 const TAU = Math.PI * 2;
-const NUMBER_OF_WAVES = 20;
+const NUMBER_OF_WAVES = 30;
 const SEGMENTS = 80;
 const SMOOTHNESS = 1;
 const WAVE_FACTOR = 5;
@@ -63,9 +63,10 @@ const getPath = ({
       radius: NOISE_SCALE,
     });
 
-    const indexFactor = 0.5 * (index / totalNumberOfWaves);
+    const indexFactor = 1 * (index / totalNumberOfWaves);
     const randomFactor =
-      (0.1 + loudness) * (1 + noise(noiseCoords.x, noiseCoords.y, seed * 0.01));
+      (0.1 + loudness) *
+      (1 + noise(noiseCoords.x, noiseCoords.y, 0.05 * index + seed * 0.5));
     const sinFactor =
       loudness * (1 + Math.sin(WAVE_FACTOR * TAU * (angleInRadians / TAU)));
 
@@ -201,26 +202,10 @@ export const CircularWave = ({
     seed: 40,
     totalNumberOfWaves,
   });
-  const path05 = getPath({
-    center,
-    index,
-    loudness: 0.8,
-    radius,
-    seed: 50,
-    totalNumberOfWaves,
-  });
-  const path06 = getPath({
-    center,
-    index,
-    loudness: 1,
-    radius,
-    seed: 60,
-    totalNumberOfWaves,
-  });
   const path = usePathInterpolation(
     volume,
-    [0, 0.2, 0.4, 0.6, 0.8, 1],
-    [path01, path02, path03, path04, path05, path06],
+    [0, 0.3, 0.6, 1],
+    [path01, path02, path03, path04],
   );
 
   return (
@@ -228,7 +213,7 @@ export const CircularWave = ({
       color={color}
       opacity={opacity}
       path={path}
-      strokeWidth={1}
+      strokeWidth={1 + index / totalNumberOfWaves}
       style="stroke"
     />
   );
@@ -240,12 +225,13 @@ interface Props {
 
 export const RecordingWave = ({ volume }: Props) => {
   const rotation = useSharedValue(0);
-  const size = 300;
+  const { width } = Dimensions.get("window");
+  const size = width;
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: no need to include shared values
   useEffect(() => {
     rotation.value = withRepeat(
-      withSequence(withTiming(1, { duration: 10000, easing: Easing.linear })),
+      withSequence(withTiming(1, { duration: 20000, easing: Easing.linear })),
       -1,
     );
   }, []);
@@ -263,7 +249,7 @@ export const RecordingWave = ({ volume }: Props) => {
               center={{ x: size * 0.5, y: size * 0.5 }}
               index={i}
               key={`wave_${i}`}
-              radius={size * 0.4}
+              radius={size * 0.5}
               totalNumberOfWaves={NUMBER_OF_WAVES}
               volume={volume}
             />

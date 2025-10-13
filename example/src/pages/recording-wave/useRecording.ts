@@ -79,11 +79,9 @@ export const useRecording = () => {
         const meteringFactor = (160 + currentMetering) / 160;
         volume.value = withSpring(
           ease(
-            interpolate(meteringFactor, [0, 1], [0.5, 1], Extrapolation.CLAMP),
+            interpolate(meteringFactor, [0, 1], [0.25, 1], Extrapolation.CLAMP),
           ),
-          {
-            duration: 20,
-          },
+          { duration: 50 },
         );
       } catch {
         clearInterval(interval);

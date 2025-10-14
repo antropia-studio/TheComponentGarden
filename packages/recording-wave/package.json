@@ -4,11 +4,13 @@
     "url": "https://github.com/antropia.studio/TheComponentGarden/issues"
   },
   "dependencies": {
-    "@antropia/the-component-garden-lib": "workspace:*"
+    "@antropia/the-component-garden-lib": "workspace:*",
+    "flubber": "^0.4.2"
   },
   "description": "A carousel component that brings some joy to your React Native apps.",
   "devDependencies": {
     "@shopify/react-native-skia": "2.3.0",
+    "@types/flubber": "^0.4.0",
     "del-cli": "^7.0.0",
     "lucide-react-native": "^0.544.0",
     "react": "19.1.0",
@@ -56,6 +58,7 @@
   "packageManager": "pnpm@10.16.1",
   "peerDependencies": {
     "@shopify/react-native-skia": "2.x.x",
+    "flubber": "0.x.x",
     "lucide-react-native": "0.x.x",
     "react": "*",
     "react-native": "*",

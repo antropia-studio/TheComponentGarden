@@ -1,11 +1,11 @@
 import { RecordingWave } from "@antropia/the-component-garden-recording-wave";
 import { StatusBar } from "expo-status-bar";
-import { Pressable, Text, View } from "react-native";
+import { View } from "react-native";
 import tw from "../../theme";
 import { useRecording } from "./useRecording";
 
 export const RecordingWaveScreen = () => {
-  const { startRecording, stopRecording, isRecording, volume } = useRecording();
+  const { startRecording, stopRecording, volume } = useRecording();
 
   return (
     <View
@@ -13,14 +13,11 @@ export const RecordingWaveScreen = () => {
     >
       <StatusBar style="light" />
 
-      <RecordingWave volume={volume} />
-
-      <Pressable
-        onPress={() => (isRecording ? stopRecording() : startRecording())}
-        style={tw`mb-10 items-center rounded-xl bg-secondary px-4 py-4`}
-      >
-        <Text style={tw`font-bold text-white`}>Start recording</Text>
-      </Pressable>
+      <RecordingWave
+        onRecordStart={startRecording}
+        onRecordStop={stopRecording}
+        volume={volume}
+      />
     </View>
   );
 };

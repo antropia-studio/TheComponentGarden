@@ -1,9 +1,6 @@
 // biome-ignore-all lint: This file is not worth linting
 const path = require("path");
 const { getDefaultConfig } = require("@expo/metro-config");
-const {
-  wrapWithAudioAPIMetroConfig,
-} = require("react-native-audio-api/metro-config");
 
 const root = path.resolve(__dirname, "..");
 
@@ -30,4 +27,4 @@ const config = {
   watchFolders: [root],
 };
 
-module.exports = wrapWithAudioAPIMetroConfig(config);
+module.exports = config;

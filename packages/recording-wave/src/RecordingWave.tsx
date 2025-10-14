@@ -10,27 +10,30 @@ import {
   BackdropBlur,
   Canvas,
   Fill,
+  Group,
   interpolateColors,
   Path,
   Skia,
   usePathInterpolation,
 } from "@shopify/react-native-skia";
-import { useEffect, useMemo } from "react";
-import { Dimensions, View } from "react-native";
-import Animated, {
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Dimensions, Pressable, View } from "react-native";
+import {
   Easing,
   type SharedValue,
-  useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withRepeat,
   withSequence,
+  withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { createNoise3D } from "simplex-noise";
 import tw from "twrnc";
+import { StartStopButton } from "./StartStopButton";
 
 const TAU = Math.PI * 2;
-const NUMBER_OF_WAVES = 30;
+const NUMBER_OF_WAVES = 20;
 const SEGMENTS = 80;
 const SMOOTHNESS = 1;
 const WAVE_FACTOR = 5;
@@ -63,7 +66,7 @@ const getPath = ({
       radius: NOISE_SCALE,
     });
 
-    const indexFactor = 1 * (index / totalNumberOfWaves);
+    const indexFactor = index / totalNumberOfWaves;
     const randomFactor =
       (0.1 + loudness) *
       (1 + noise(noiseCoords.x, noiseCoords.y, 0.05 * index + seed * 0.5));
@@ -215,53 +218,85 @@ export const CircularWave = ({
       path={path}
       strokeWidth={1 + index / totalNumberOfWaves}
       style="stroke"
+      transform={[{ rotate: 0 }]}
     />
   );
 };
 
 interface Props {
   volume: SharedValue<number>;
+  onRecordStart: () => void;
+  onRecordStop: () => void;
 }
 
-export const RecordingWave = ({ volume }: Props) => {
+export const RecordingWave = ({
+  volume,
+  onRecordStop,
+  onRecordStart,
+}: Props) => {
+  const [isRecording, setIsRecording] = useState(false);
   const rotation = useSharedValue(0);
+  const scale = useSharedValue(0);
   const { width } = Dimensions.get("window");
   const size = width;
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: no need to include shared values
   useEffect(() => {
     rotation.value = withRepeat(
-      withSequence(withTiming(1, { duration: 20000, easing: Easing.linear })),
+      withSequence(
+        withTiming(2 * Math.PI, { duration: 10000, easing: Easing.linear }),
+      ),
       -1,
     );
   }, []);
 
-  const animatedStyle = useAnimatedStyle(() => {
-    return { transform: [{ rotate: `${rotation.value * 360}deg` }] };
-  });
+  const transform = useDerivedValue(
+    () => [{ rotate: rotation.value }, { scale: scale.value }],
+    [rotation, scale],
+  );
+
+  const handleOnRecordPress = useCallback(() => {
+    if (isRecording) {
+      onRecordStop();
+      scale.value = withSpring(0, { dampingRatio: 0.8, mass: 20 });
+    } else {
+      onRecordStart();
+      scale.value = withSpring(1, { dampingRatio: 0.8, mass: 20 });
+    }
+
+    setIsRecording((r) => !r);
+  }, [onRecordStart, onRecordStop, isRecording, scale]);
 
   return (
     <View style={tw`flex-1 items-center justify-center`}>
-      <Animated.View style={[{ height: size, width: size }, animatedStyle]}>
+      <Pressable
+        onPress={handleOnRecordPress}
+        style={[{ height: size, width: size }]}
+      >
         <Canvas style={[{ flex: 1 }]}>
-          {repeat(NUMBER_OF_WAVES, (i) => i).map((i) => (
-            <CircularWave
-              center={{ x: size * 0.5, y: size * 0.5 }}
-              index={i}
-              key={`wave_${i}`}
-              radius={size * 0.5}
-              totalNumberOfWaves={NUMBER_OF_WAVES}
-              volume={volume}
-            />
-          ))}
+          <Group origin={{ x: size / 2, y: size / 2 }} transform={transform}>
+            {repeat(NUMBER_OF_WAVES, (i) => i).map((i) => (
+              <CircularWave
+                center={{ x: size * 0.5, y: size * 0.5 }}
+                index={i}
+                key={`wave_${i}`}
+                radius={size * 0.5}
+                totalNumberOfWaves={NUMBER_OF_WAVES}
+                volume={volume}
+              />
+            ))}
+          </Group>
+
           <BackdropBlur
             blur={2}
             clip={{ height: size, width: size, x: 0, y: 0 }}
           >
             <Fill color="#FFFFFF00" />
           </BackdropBlur>
+
+          <StartStopButton isRecording={isRecording} />
         </Canvas>
-      </Animated.View>
+      </Pressable>
     </View>
   );
 };

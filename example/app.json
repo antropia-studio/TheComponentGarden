@@ -16,25 +16,7 @@
     "name": "The Component Garden",
     "newArchEnabled": true,
     "orientation": "portrait",
-    "plugins": [
-      [
-        "react-native-audio-api",
-        {
-          "androidForegroundService": true,
-          "androidFSTypes": [
-            "mediaPlayback"
-          ],
-          "androidPermissions": [
-            "android.permission.MODIFY_AUDIO_SETTINGS",
-            "android.permission.FOREGROUND_SERVICE",
-            "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
-          ],
-          "iosBackgroundMode": true,
-          "iosMicrophonePermission": "This app requires access to the microphone to record audio."
-        }
-      ],
-      "expo-audio"
-    ],
+    "plugins": ["expo-audio"],
     "slug": "thecomponentgarden",
     "splash": {
       "backgroundColor": "#ffffff",

@@ -37,10 +37,10 @@ All packages are published to NPM under the `@antropia` organization, and all of
 
 This is a list of the different components we have developed so far.
 
-| Component      | Description                 | Example                                                |
-|----------------|-----------------------------|--------------------------------------------------------|
-| card-deck      | Animated card selector      | ![Card Deck component](./docs/tcg-video.gif)           |
-| recording-wave | Futuristic recording wave   | ![Recording Wave component](./docs/recording-wave.gif) |
+| Component      | Tags                                         | Example                                             |
+|----------------|----------------------------------------------|-----------------------------------------------------|
+| card-deck      | `Drag&Drop`, `Gesture Handler`, `Reanimated` | <img src="./docs/tcg-video.gif" height="250"/>      |
+| recording-wave | `Expo Audio`, `Skia`, `Reanimated`           | <img src="./docs/recording-wave.gif" height="250"/> |
 
 ## Development
 
@@ -69,6 +69,6 @@ The project uses [biome](https://biomejs.dev/) for linting and formatting, so ma
 
 ## With ❤️ by Antropia
 
-[Webpage](https://antropia.studio/) | [Blog](https://antropia.studio/blog/) | [Bluesky](https://bsky.app/profile/antropia.bsky.social) | [Mastodon](https://mstdn.social/@Antropia) | [LinkedIn](https://www.linkedin.com/company/antropia-studio/)
+[Webpage](https://antropia.studio/) | [Blog](https://antropia.studio/blog/) | [Bluesky](https://bsky.app/profile/antropia.bsky.social) | [Mastodon](https://mstdn.social/@Antropia) | [TikTok](https://www.tiktok.com/@antropiastudio) | [LinkedIn](https://www.linkedin.com/company/antropia-studio/)
 
 </div>

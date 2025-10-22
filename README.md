@@ -33,6 +33,15 @@ TheComponentGarden
 
 All packages are published to NPM under the `@antropia` organization, and all of them have follow the same naming pattern: `@antropia/the-component-garden-*`.
 
+## Packages
+
+This is a list of the different components we have developed so far.
+
+| Component      | Description                 | Example                                                |
+|----------------|-----------------------------|--------------------------------------------------------|
+| card-deck      | Animated card selector      | ![Card Deck component](./docs/tcg-video.gif)           |
+| recording-wave | Futuristic recording wave   | ![Recording Wave component](./docs/recording-wave.gif) |
+
 ## Development
 
 We use [`pnpm`](https://pnpm.io/) to manage this monorepo and its dependencies. If you want to play with these components, make sure you install all required dependencies first by running:
